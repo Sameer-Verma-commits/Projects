@@ -2,6 +2,11 @@ import psutil
 import mysql.connector
 import smtplib
 from email.message import EmailMessage
+import os
+from dotenv import load_dotenv
+
+load_dotenv("Credentials.env")
+
 
 flag={"CPU":0,"Disk":0,"RAM":0}
 
@@ -38,7 +43,10 @@ def check_memory():
     return usage
     
 def get_recipients():
-    conn=mysql.connector.connect(host='localhost',user='root',passwd='1234',database='Support_Team')
+    conn=mysql.connector.connect(host=os.getenv("MYSQL_HOST"),
+                                user=os.getenv("MYSQL_USER"),
+                                passwd=os.getenv("MYSQL_PASSWORD"),
+                                database=os.getenv("MYSQL_DATABASE"))
     if conn.is_connected()== False:
         print("Unable To Connect To Support Team...")
         #returning empty list if failed to fetch detail
@@ -56,7 +64,11 @@ def get_recipients():
     return Names,Emails
 
 def record_alert(Type,Msg):
-    conn=mysql.connector.connect(host='localhost',user='root',passwd='1234',database='Support_Team')
+    conn=mysql.connector.connect(host=os.getenv("MYSQL_HOST"),
+                                user=os.getenv("MYSQL_USER"),
+                                passwd=os.getenv("MYSQL_PASSWORD"),
+                                database=os.getenv("MYSQL_DATABASE"))
+    
     if conn.is_connected()== False:
         #Raising error for missing record log and return
         print("Alert Cannot Be Recorded To Database...")
@@ -73,9 +85,9 @@ def alert_email(subject,body,email):
     SMTP_SERVER = "smtp.gmail.com"
     SMTP_PORT = 587
     #Email credentials
-    sender="xyz@gmail.com"  #Sender's E-Mail
+    sender = os.getenv("EMAIL_SENDER")  #Sender's E-Mail
     reciever=email
-    password="**************"   #Password (Gmail user enter their App key)
+    password = os.getenv("EMAIL_PASSWORD")   #Password (Gmail user enter their App key)
     # Create the email
     msg = EmailMessage()
     msg["From"] =sender
