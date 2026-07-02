@@ -1,3 +1,18 @@
+**Configuration:**
+1.Create Credentials.env file
+2.Use example.env as reference
+3.Download:
+		python
+		psutil
+		mysql-connector-python
+		dotenv
+		mysql
+4.Create database and tables schema (Alert log, Tech members) as per documentation
+5.Make sure .env and .py is in same folder
+6.Execute python script
+		
+
+**ABOUT**
 To develop an automated system that:
    On demand monitors system resources
    Detects abnormal or high usage
