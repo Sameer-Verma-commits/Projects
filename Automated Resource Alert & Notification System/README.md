@@ -45,4 +45,3 @@ Using psutil, the system captures:
   •	RAM Usage
   •	Disk Partition Status
 Thresholds determine when an alert needs to be generated.
-
