@@ -108,7 +108,6 @@ def alert_email(subject,body,email):
     else:
         print("Email Sent Successfully")
 
-
 def report_generate(cpu,p,disk,ram):
     res=[]
     text1=text2=text3=""
