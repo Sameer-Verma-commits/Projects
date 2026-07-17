@@ -102,10 +102,11 @@ def alert_email(subject,body,email):
         server.send_message(msg)
         server.quit()
 
-        print("To:",reciever,"\t[Email sent successfully!]")
-
     except Exception as e:
         print("Failed to send email:", e)
+        
+    else:
+        print("Email Sent Successfully")
 
 
 def report_generate(cpu,p,disk,ram):
